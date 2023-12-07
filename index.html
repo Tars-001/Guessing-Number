@@ -24,8 +24,8 @@
     const guessField = document.getElementById("guessField");
     const guessSubmit = document.getElementById("guessSubmit");
     const message = document.querySelector(".message");
-    //新增揭示答案
-    const answer = document.querySelector(".answer");
+
+    const answer = document.querySelector(".answer"); //新增揭示答案
 
     //點擊後執行給答案的動作
     guessAnswer.addEventListener("click", revealAnswer);
@@ -50,8 +50,7 @@
       guessCount++;
 
       if (userGuess === targetNumber) {
-        message.textContent =
-          `恭喜你，你猜對了！你這次猜了` + guessCount + `次喔～`;
+        message.textContent = `恭喜你，你猜對了！你這次猜了${guessCount}次喔～`;
         message.style.color = "green";
         guessSubmit.disabled = true;
       } else if (userGuess < targetNumber) {
@@ -60,6 +59,11 @@
       } else {
         message.textContent = "太大了，再試一次。";
         message.style.color = "red";
+      }
+
+      if (guessCount > 5) {
+        message.textContent = `You failed! 答案是${targetNumber}`;
+        guessSubmit.disabled = true;
       }
 
       guessField.value = "";
