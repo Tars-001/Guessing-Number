@@ -8,8 +8,12 @@
     <h1>猜數字遊戲</h1>
     <p>1 到 100 之間的數字，你猜是多少？</p>
     <input type="text" id="guessField" />
-    <input type="submit" value="猜!" id="guessSubmit" />
+    <input type="submit" value="猜！" id="guessSubmit" />
+    <!-- 揭曉答案的按鈕 -->
+    <button id="guessAnswer">不想猜了，揭曉答案</button>
+    <!-- <input type="submit" value="不想猜了，揭曉答案" id="guessAnswer" /> -->
     <p class="message"></p>
+    <p class="answer"></p>
   </body>
   <script>
     // Random number
@@ -20,12 +24,23 @@
     const guessField = document.getElementById("guessField");
     const guessSubmit = document.getElementById("guessSubmit");
     const message = document.querySelector(".message");
+    //新增揭示答案
+    const answer = document.querySelector(".answer");
+
+    //點擊後執行給答案的動作
+    guessAnswer.addEventListener("click", revealAnswer);
 
     // Event listener
     guessSubmit.addEventListener("click", checkGuess);
 
     // Count guessing times
     let guessCount = 0;
+
+    //揭曉答案的function
+    function revealAnswer() {
+      answer.textContent = "答案是" + targetNumber;
+      answer.style.color = "grey";
+    }
 
     // Guess function
     function checkGuess() {
