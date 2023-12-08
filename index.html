@@ -11,36 +11,29 @@
     <input type="submit" value="猜！" id="guessSubmit" />
     <!-- 揭曉答案的按鈕 -->
     <button id="guessAnswer">不想猜了，揭曉答案</button>
+    <button id="guessAgain">再玩一次</button>
     <!-- <input type="submit" value="不想猜了，揭曉答案" id="guessAnswer" /> -->
     <p class="message"></p>
     <p class="answer"></p>
   </body>
   <script>
     // Random number
-    const targetNumber = Math.floor(Math.random() * 100) + 1;
+    let targetNumber = Math.floor(Math.random() * 100) + 1;
     console.log("answer: " + targetNumber);
 
     // Get element
     const guessField = document.getElementById("guessField");
     const guessSubmit = document.getElementById("guessSubmit");
     const message = document.querySelector(".message");
-
     const answer = document.querySelector(".answer"); //新增揭示答案
-
-    //點擊後執行給答案的動作
-    guessAnswer.addEventListener("click", revealAnswer);
 
     // Event listener
     guessSubmit.addEventListener("click", checkGuess);
+    guessAnswer.addEventListener("click", revealAnswer); //點擊後執行給答案的動作
+    guessAgain.addEventListener("click", newGame); //點擊後執行新遊戲
 
     // Count guessing times
     let guessCount = 0;
-
-    //揭曉答案的function
-    function revealAnswer() {
-      answer.textContent = "答案是" + targetNumber;
-      answer.style.color = "grey";
-    }
 
     // Guess function
     function checkGuess() {
@@ -68,6 +61,21 @@
 
       guessField.value = "";
       guessField.focus();
+    }
+
+    function newGame() {
+      targetNumber = Math.floor(Math.random() * 100) + 1;
+      console.log("answer: " + targetNumber);
+      message.textContent = "";
+      answer.textContent = "";
+      guessSubmit.disabled = false;
+      guessCount = 0;
+    }
+
+    //揭曉答案的function
+    function revealAnswer() {
+      answer.textContent = "答案是" + targetNumber;
+      answer.style.color = "grey";
     }
   </script>
 </html>
