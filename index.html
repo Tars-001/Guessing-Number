@@ -57,6 +57,7 @@
       if (guessCount > 5) {
         message.textContent = `You failed! 答案是${targetNumber}`;
         guessSubmit.disabled = true;
+        setTimeout(newGame, 5000);
       }
 
       guessField.value = "";
