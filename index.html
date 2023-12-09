@@ -15,6 +15,7 @@
     <!-- <input type="submit" value="不想猜了，揭曉答案" id="guessAnswer" /> -->
     <p class="message"></p>
     <p class="answer"></p>
+    <p class="second"></p>
   </body>
   <script>
     // Random number
@@ -26,6 +27,7 @@
     const guessSubmit = document.getElementById("guessSubmit");
     const message = document.querySelector(".message");
     const answer = document.querySelector(".answer"); //新增揭示答案
+    const second = document.querySelector(".second");
 
     // Event listener
     guessSubmit.addEventListener("click", checkGuess);
@@ -57,6 +59,12 @@
       if (guessCount > 5) {
         message.textContent = `You failed! 答案是${targetNumber}`;
         guessSubmit.disabled = true;
+        delayedDisplay("新局開始倒數5秒", 0, display);
+        delayedDisplay("新局開始倒數4秒", 1000, display);
+        delayedDisplay("新局開始倒數3秒", 2000, display);
+        delayedDisplay("新局開始倒數2秒", 3000, display);
+        delayedDisplay("新局開始倒數1秒", 4000, display);
+        delayedDisplay(" ", 5000, display);
         setTimeout(newGame, 5000);
       }
 
@@ -77,6 +85,17 @@
     function revealAnswer() {
       answer.textContent = "答案是" + targetNumber;
       answer.style.color = "grey";
+    }
+
+    //失敗後倒數五秒的function
+    function delayedDisplay(string, ms, callbackFunction) {
+      setTimeout(() => {
+        callbackFunction(string);
+      }, ms);
+    }
+
+    function display(result) {
+      second.textContent = result;
     }
   </script>
 </html>
